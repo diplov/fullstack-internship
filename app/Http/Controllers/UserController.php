@@ -6,6 +6,23 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+     public function login(Request $request)
+    {
+        // Simulate login by storing user in session
+        $users = [
+            'admin@example.com' => ['email' => 'admin@example.com', 'role' => 'admin'],
+            'employee@example.com' => ['email' => 'employee@example.com', 'role' => 'employee'],
+        ];
+
+        $email = $request->input('email');
+
+        if (isset($users[$email])) {
+            $request->session()->put('user', $users[$email]);
+            return redirect('/home');
+        }
+
+        return redirect('/login')->withErrors(['email' => 'Invalid credentials']);
+    }
     // displaying users according to their id
     public function showById($id){
         $users=[

@@ -11,4 +11,5 @@ class AdminController extends Controller
         $user = $request->attributes->get('user');
         return view('admin.dashboard', ['user' => $user]);
     }
+   
 }
